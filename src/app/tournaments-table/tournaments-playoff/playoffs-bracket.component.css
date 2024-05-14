@@ -1,0 +1,218 @@
+element.style {
+  --skip-round: 1;
+  --qual-skip: 0;
+}
+.brkts-round-body {
+  display: inline-flex;
+  align-items: flex-start;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+user agent stylesheet
+div {
+  display: block;
+  unicode-bidi: isolate;
+}
+style attribute {
+  --skip-round: 1;
+  --qual-skip: 0;
+}
+style attribute {
+  --skip-round: 0;
+  --qual-skip: 0;
+}
+style attribute {
+  --match-width: 180px;
+  --match-width-mobile: 90px;
+  --score-width: 20px;
+  --round-horizontal-margin: 20px;
+  --opponent-height: 24px;
+}
+@media (max-width: 768px) {
+  .brkts-bracket {
+      --brkts-team-icon-width: 30px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .brkts-bracket {
+      --match-width: var(--match-width-mobile) !important;
+  }
+}
+.brkts-bracket {
+  display: inline-flex;
+  flex-direction: column;
+  font-size: 13px;
+  padding: 2px;
+  position: relative;
+}
+table {
+  border-collapse: collapse;
+}
+table {
+  font-size: 100%;
+}
+user agent stylesheet
+table {
+  border-collapse: separate;
+  text-indent: initial;
+  border-spacing: 2px;
+}
+body {
+  text-decoration-skip-ink: none;
+}
+body {
+  font-size: 0.9375rem;
+  width: 100%;
+  min-height: 100%;
+  padding: calc(3.125rem + 2.25rem) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: transparent;
+  color: var(--clr-on-background);
+}
+body {
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+html.theme--dark, html.theme--dark:before, html.theme--dark:after {
+  --clr-wiki-theme-primary: var(--clr-cinnabar-30);
+  --clr-wiki-primary: #ffb3aa;
+  --clr-wiki-on-primary: #690006;
+  --clr-wiki-primary-container: #93000d;
+  --clr-wiki-on-primary-container: #ffdad5;
+  --clr-primary: #9fc9ff;
+  --clr-on-primary: #00325b;
+  --clr-primary-container: #004880;
+  --clr-on-primary-container: #d1e4ff;
+  --clr-secondary: #bbc7db;
+  --clr-on-secondary: #253141;
+  --clr-secondary-container: #3c4858;
+  --clr-on-secondary-container: #d7e3f8;
+  --clr-tertiary: #d7bde4;
+  --clr-on-tertiary: #3c2948;
+  --clr-tertiary-container: #533f5f;
+  --clr-on-tertiary-container: #f4d9ff;
+  --clr-error: #ffb4a9;
+  --clr-on-error: #680003;
+  --clr-error-container: #930006;
+  --clr-on-error-container: #ffdad4;
+  --clr-background: #121212;
+  --clr-on-background: #e2e2e6;
+  --clr-surface: #1b1b1b;
+  --clr-on-surface: #e2e2e6;
+  --clr-surface-variant: #43474e;
+  --clr-on-surface-variant: #ffffff;
+  --clr-outline: #8d9199;
+  --clr-confirmed: #84d994;
+  --clr-on-confirmed: #003915;
+  --clr-confirmed-container: #005322;
+  --clr-on-confirmed-container: #9ff6ae;
+  --clr-surface-1: #121212;
+  --clr-surface-2: #181818;
+  --clr-surface-3: #282828;
+  --clr-surface-4: #646464;
+  --clr-surface-5: #b3b3b3;
+  --clr-border: rgba(255,255,255,0.08);
+  --clr-gold: #998000;
+  --clr-on-gold: #f8e9a0;
+  --clr-silver: #3c585d;
+  --clr-on-silver: #bfd5d9;
+  --clr-bronze: #655634;
+  --clr-on-bronze: #e0d3b8;
+  --clr-copper: #995700;
+  --clr-on-copper: #ffcd99;
+  --clr-atlantis-background-color: var(--clr-atlantis-10);
+  --clr-california-background-color: var(--clr-california-10);
+  --clr-cinnabar-background-color: var(--clr-cinnabar-10);
+  --clr-elm-background-color: var(--clr-elm-10);
+Show All Properties (113 more)
+}
+:root {
+  --wiki-color-dark: #5f1616;
+  --wiki-color-medium: #b12a2a;
+  --wiki-color-light: #fbdfdf;
+  --wiki-color-focus: #f3cdcd;
+}
+:root {
+  --wiki-theme-name: cinnabar;
+  --clr-primary-base: #0b61a4;
+  --clr-primary-10: #031c30;
+  --clr-primary-20: #063960;
+  --clr-primary-30: #0a558f;
+  --clr-primary-40: #0d71bf;
+  --clr-primary-80: #9fd2f9;
+  --clr-primary-90: #cfe8fc;
+  --clr-primary-96: #ecf6fe;
+  --clr-primary-100: #ffffff;
+  --clr-secondary-base: #000000;
+  --clr-secondary-7: #121212;
+  --clr-secondary-9: #181818;
+  --clr-secondary-16: #282828;
+  --clr-secondary-25: #404040;
+  --clr-secondary-39: #646464;
+  --clr-secondary-70: #b3b3b3;
+  --clr-secondary-100: #ffffff;
+  --clr-atlantis-base: #466800;
+  --clr-atlantis-10: #1f2b08;
+  --clr-atlantis-20: #3f5610;
+  --clr-atlantis-30: #5e8118;
+  --clr-atlantis-40: #7eac20;
+  --clr-atlantis-80: #d8efa9;
+  --clr-atlantis-90: #ebf7d4;
+  --clr-california-base: #954a00;
+  --clr-california-10: #331900;
+  --clr-california-20: #663300;
+  --clr-california-30: #994c00;
+  --clr-california-40: #cc6500;
+  --clr-california-80: #ffcc99;
+  --clr-california-90: #ffe5cc;
+  --clr-cinnabar-base: #bc111d;
+  --clr-cinnabar-10: #2e0505;
+  --clr-cinnabar-20: #5c0a0a;
+  --clr-cinnabar-30: #8a0f0f;
+  --clr-cinnabar-40: #b81414;
+  --clr-cinnabar-80: #f5a3a3;
+  --clr-cinnabar-90: #fad1d1;
+  --clr-elm: #006a6a;
+  --clr-elm-10: #0a2929;
+  --clr-elm-20: #145252;
+  --clr-elm-30: #1e7d7d;
+  --clr-elm-40: #27a4a4;
+  --clr-elm-80: #adebeb;
+  --clr-elm-90: #d6f5f5;
+  --clr-moon-base: #000000;
+  --clr-moon-10: #1a1a1a;
+  --clr-moon-20: #333333;
+  --clr-moon-30: #4d4d4d;
+Show All Properties (107 more)
+}
+html {
+  background-color: var(--clr-background);
+  color: var(--clr-on-background);
+  scroll-padding-top: 3.125rem;
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  overflow-y: auto;
+}
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+}

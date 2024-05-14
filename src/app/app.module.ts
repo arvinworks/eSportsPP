@@ -6,6 +6,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // used to create fake backend
 import { fakeBackendProvider } from './_helpers';
 
+import { CommonModule } from '@angular/common';  
+import { TournamentComponent } from './tournaments/tournament.component';
+import { TournamentTableComponent } from './tournaments-table/tournament-table.component';
 import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor, appInitializer } from './_helpers';
 import { AccountService } from './_services';
@@ -18,12 +21,15 @@ import { HomeComponent } from './home';
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule,
+        CommonModule 
     ],
     declarations: [
         AppComponent,
         AlertComponent,
-        HomeComponent
+        HomeComponent,
+        TournamentComponent,
+        TournamentTableComponent
     ],
     providers: [
         { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [AccountService] },
@@ -31,7 +37,7 @@ import { HomeComponent } from './home';
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
-        //fakeBackendProvider
+        fakeBackendProvider
     ],
     bootstrap: [AppComponent]
 })
