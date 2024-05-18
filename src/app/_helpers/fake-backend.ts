@@ -8,6 +8,7 @@ import { Role } from '@app/_models';
 
 // array in local storage for accounts
 const accountsKey = 'angular-10-signup-verification-boilerplate-accounts';
+const teamsKey = 'angular-teams';
 let accounts = JSON.parse(localStorage.getItem(accountsKey)) || [];
 
 @Injectable()
@@ -48,6 +49,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return updateAccount();
                 case url.match(/\/accounts\/\d+$/) && method === 'DELETE':
                     return deleteAccount();
+                case url.endsWith('/teams') && method === 'POST':
+                    return createTeam();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -383,6 +386,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // get refresh token from cookie
             return (document.cookie.split(';').find(x => x.includes('fakeRefreshToken')) || '=').split('=')[1];
         }
+
+        function createTeam() {
+            if (!isAuthorized(Role.Admin)) return unauthorized();
+        
+            const team = body;
+        
+            
+            const teamExists = team.some(t => t.name === team.name);
+            if (teamExists) {
+                return error('Team name already exists');
+            }
+        
+            
+            const newTeamId = team.length > 0 ? Math.max(...team.map(t => t.id)) + 1 : 1;
+            team.id = newTeamId;
+        
+           
+            team.push(team);
+            
+            
+            localStorage.setItem(teamsKey, JSON.stringify(team));
+        
+            
+            return ok();
+        }
+        
     }
 }
 
