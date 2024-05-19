@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../../_services/team.services';
-import { Team } from '../../_models/team'
+import { Router } from '@angular/router';
+import { Team } from '../../_models/team';
 
 @Component({
   selector: 'app-team-list',
@@ -10,7 +11,10 @@ import { Team } from '../../_models/team'
 export class TeamListComponent implements OnInit {
   teams: Team[];
 
-  constructor(private teamService: TeamService) {}
+  constructor(
+    private teamService: TeamService,
+    private router: Router  
+  ) {}
 
   ngOnInit(): void {
     this.teamService.getAll().subscribe(teams => this.teams = teams);
@@ -20,5 +24,9 @@ export class TeamListComponent implements OnInit {
     this.teamService.delete(id).subscribe(() => {
       this.teams = this.teams.filter(team => team.teamId !== id);
     });
+  }
+
+  viewTeam(id: string) {
+    this.router.navigate(['/teams/profile', id]);
   }
 }

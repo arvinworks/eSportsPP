@@ -3,11 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { PlayerListComponent } from './list/list.component';
 import { AddEditPlayerComponent } from './add-edit/add-edit-players.component';
+import { PlayerProfileComponent } from './player-profile/player-profile.component';
 
 const routes: Routes = [
     { path: '', component: PlayerListComponent },
     { path: 'add', component: AddEditPlayerComponent },
-    { path: 'edit/:id', component: AddEditPlayerComponent }
+    { path: 'edit/:id', component: AddEditPlayerComponent },
+    { path: 'profile/:id', component: PlayerProfileComponent }
 ];
 
 @NgModule({

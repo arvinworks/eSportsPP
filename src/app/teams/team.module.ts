@@ -12,7 +12,7 @@ import { AddEditTeamComponent } from './add-edit/add-edit-team.component';
         ReactiveFormsModule,
         TeamRoutingModule
     ],
-    declarations: [
+    declarations: [ 
         TeamListComponent,
         AddEditTeamComponent
     ]

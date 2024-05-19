@@ -4,22 +4,28 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Email</th>
-      <th>Team</th>
+      <th>Nationality</th>
+      <th>Born</th>
+      <th>Region</th>
+      <th>Role</th>
+      <th>In-Game Name</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let player of players">
-      <td>{{ player.firstName }} {{ player.lastName }}</td>
-      <td>{{ player.email }}</td>
-      <td>{{ player.teamId }}</td>
+      <td><a (click)="viewPlayer(player.id)">{{ player.name }}</a></td>
+      <td>{{ player.nationality }}</td>
+      <td>{{ player.born }}</td>
+      <td>{{ player.region }}</td>
+      <td>{{ player.role }}</td>
+      <td>{{ player.ingameName }}</td>
       <td>
         <a [routerLink]="['edit', player.id]" class="btn btn-sm btn-primary mr-1">Edit</a>
-                <button (click)="deletePlayer(player.id)" class="btn btn-sm btn-danger" [disabled]="player.isDeleting">
-                    <span *ngIf="player.isDeleting" class="spinner-border spinner-border-sm"></span>
-                    <span *ngIf="!player.isDeleting">Delete</span>
-                </button>
+        <button (click)="deletePlayer(player.id)" class="btn btn-sm btn-danger" [disabled]="player.isDeleting">
+          <span *ngIf="player.isDeleting" class="spinner-border spinner-border-sm"></span>
+          <span *ngIf="!player.isDeleting">Delete</span>
+        </button>
       </td>
     </tr>
   </tbody>
