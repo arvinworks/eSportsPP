@@ -17,7 +17,7 @@
 
 <body>
   <div class="container">
-    <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <table id="tables" class="table table-striped table-bordered" style="width:100%">
       <thead>
       <tr>
         <th>Tournament</th>
@@ -49,21 +49,15 @@
   </table>
 </div>
 </body>
-  <script>
+<script>
   $(document).ready(function() {
-      // Hide the table initially
-      $('#example').hide();
-  
-      // Click event listener for Dota 2 image
-      $('#dota2Image').click(function() {
-          // Show the table container and hide the image
-          $('#example').show();
-          $('#dota2Image').hide();
-  
-          // Initialize DataTable
-          $('#example').DataTable();
-      });
+    $('#tables').DataTable({
+      "paging": false,
+      "searching": false,
+      "info": false,
+      "ordering": true
+    });
   });
-  </script>
+</script>
   
 </html>

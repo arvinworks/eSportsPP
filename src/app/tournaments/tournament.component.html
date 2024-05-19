@@ -1,14 +1,14 @@
 <h2 class="title">Tournament</h2>
 <div class="tournament-container">
   <div class="tournament-images">
-    <img src="assets/img/dota2-image.png" id="dota2Image" (click)="toggleTournamentData('dota2')" class="tournament-image" />
+    <img src="assets/img/dota2-image.png" (click)="toggleTournamentData('dota2')" class="tournament-image" />
     <img src="assets/img/valorant-image.png" (click)="toggleTournamentData('valorant')" class="tournament-image" />
     <img src="assets/img/mobile-legends-image.png" (click)="toggleTournamentData('mobilelegends')" class="tournament-image" />
   </div>
 </div>
 <br>
 <div class="container" *ngIf="showTables" id="tournamentTableContainer">
-  <table id="example" class="table table-striped table-bordered" style="width:100%">
+  <table id="toggleTournamentData" class="table table-striped table-bordered" style="width:100%">
     <thead>
       <tr>
         <th>Tournament</th>
@@ -21,7 +21,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of selectedTournamentData">
-        <td><span (click)="toggleBracketImage()" class="clickable">{{ data.tournament }}</span></td>
+        <td><span (click)="toggleBracketContent(data.bracketImage, data.tournament)" class="clickable">{{ data.tournament }}</span></td>
         <td>{{ data.date }}</td>
         <td>{{ data.prizePool }}</td>
         <td>{{ data.location }}</td>
@@ -30,7 +30,29 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="showBracket" class="bracket-image-container">
-    <img src="assets/img/Bracket.png" alt="Bracket Image" class="centered-image"/>
-  </div>
+  <div *ngIf="showBracket" class="centered-image">
+    <button class="schedule-button" (click)="toggleSchedule()">
+      {{ showSchedule ? 'Bracket' : 'Schedule' }}
+    </button>
+    <img *ngIf="!showSchedule" [src]="currentBracketImage" width="80%" alt="Tournament Bracket" />
+    <div *ngIf="showSchedule" class="schedule-table">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Match</th>
+                <th>Teams</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let match of currentSchedule">
+                <td>{{ match.date }}</td>
+                <td>{{ match.match }}</td>
+                <td>{{ match.teams }}</td>
+                <td>{{ match.result }}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
