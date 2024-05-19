@@ -9,7 +9,7 @@ import { PlayerService } from '../../_services/players.services';
 import { Player } from '../../_models/player';
 import { Team } from '../../_models/team';
 
-@Component({ templateUrl: 'add-edit-player.component.html' })
+@Component({ templateUrl: 'add-edit-players.component.html' })
 export class AddEditPlayerComponent implements OnInit {
     form: FormGroup;
     id: string;
@@ -52,16 +52,16 @@ export class AddEditPlayerComponent implements OnInit {
         }
     }
 
-    // convenience getter for easy access to form fields
+    
     get f() { return this.form.controls; }
 
     onSubmit() {
         this.submitted = true;
 
-        // reset alerts on submit
+        
         this.alertService.clear();
 
-        // stop here if form is invalid
+        
         if (this.form.invalid) {
             return;
         }

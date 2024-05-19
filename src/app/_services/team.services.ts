@@ -14,23 +14,23 @@ export class TeamService {
     return this.http.get<Team[]>(this.apiUrl);
   }
 
-  getById(id: string): Observable<Team> {
-    return this.http.get<Team>(`${this.apiUrl}/${id}`);
+  getById(teamId: string): Observable<Team> {
+    return this.http.get<Team>(`${this.apiUrl}/${teamId}`);
   }
 
   create(team: Team): Observable<Team> {
     return this.http.post<Team>(this.apiUrl, team);
   }
 
-  update(id: string, team: Team): Observable<Team> {
-    return this.http.put<Team>(`${this.apiUrl}/${id}`, team);
+  update(teamId: string, team: Team): Observable<Team> {
+    return this.http.put<Team>(`${this.apiUrl}/${teamId}`, team);
   }
 
   getPlayersByTeamId(teamId: string): Observable<Player[]> {
     return this.http.get<Player[]>(`${this.apiUrl}/teams/${teamId}/players`);
   }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  delete(teamId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${teamId}`);
   }
 }
