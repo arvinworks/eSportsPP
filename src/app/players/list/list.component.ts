@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../_services/players.services';
+import { TeamService } from '../../_services/team.services';
 import { Player } from '../../_models/player';
 import { Router } from '@angular/router'
 
@@ -13,6 +14,7 @@ export class PlayerListComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
+    private teamService: TeamService,
     private router: Router  
   ) {}
   ngOnInit(): void {
@@ -27,5 +29,9 @@ export class PlayerListComponent implements OnInit {
 
   viewPlayer(id: string) {
     this.router.navigate(['/players/profile', id]);
+  }
+
+  viewTeam(id: string) {
+    this.router.navigate(['/teams/profile', id]);
   }
 }

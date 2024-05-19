@@ -7,5 +7,6 @@ export class Player {
     role: string;
     ingameName: string;
     teamId: string;
+    teamName?: string;
   }
   
