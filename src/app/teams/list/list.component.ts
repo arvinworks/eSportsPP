@@ -20,13 +20,13 @@ export class TeamListComponent implements OnInit {
     this.teamService.getAll().subscribe(teams => this.teams = teams);
   }
 
-  deleteTeam(id: string) {
-    this.teamService.delete(id).subscribe(() => {
-      this.teams = this.teams.filter(team => team.teamId !== id);
+  deleteTeam(teamId: string) {
+    this.teamService.delete(teamId).subscribe(() => {
+      this.teams = this.teams.filter(team => team.teamId !== teamId);
     });
   }
 
-  viewTeam(id: string) {
-    this.router.navigate(['/teams/profile', id]);
+  viewTeam(teamId: string) {
+    this.router.navigate(['/teams/profile', teamId]);
   }
 }

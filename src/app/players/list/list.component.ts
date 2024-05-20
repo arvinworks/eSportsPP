@@ -21,17 +21,17 @@ export class PlayerListComponent implements OnInit {
     this.playerService.getAll().subscribe(players => this.players = players);
   }
 
-  deletePlayer(id: string) {
-    this.playerService.delete(id).subscribe(() => {
-      this.players = this.players.filter(player => player.id !== id);
+  deletePlayer(playerId: string) {
+    this.playerService.delete(playerId).subscribe(() => {
+      this.players = this.players.filter(player => player.playerId !== playerId);
     });
   }
 
-  viewPlayer(id: string) {
-    this.router.navigate(['/players/profile', id]);
+  viewPlayer(playerId: string) {
+    this.router.navigate(['/players/profile', playerId]);
   }
 
-  viewTeam(id: string) {
-    this.router.navigate(['/teams/profile', id]);
+  viewTeam(teamId: string) {
+    this.router.navigate(['/teams/profile', teamId]);
   }
 }

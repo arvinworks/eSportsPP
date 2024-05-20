@@ -17,7 +17,7 @@ export class PlayerProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const playerId = this.route.snapshot.paramMap.get('id');
+    const playerId = this.route.snapshot.paramMap.get('playerId');
     if (playerId) {
       this.playerService.getById(playerId).subscribe(player => {
         this.player = player;

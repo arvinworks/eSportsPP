@@ -10,7 +10,7 @@ import { Team } from '../../_models/team';
 @Component({ templateUrl: 'add-edit-team.component.html' })
 export class AddEditTeamComponent implements OnInit {
     form: FormGroup;
-    id: string;
+    teamId: string;
     isAddMode: boolean;
     loading = false;
     submitted = false;
@@ -24,8 +24,8 @@ export class AddEditTeamComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.id = this.route.snapshot.params['id'];
-        this.isAddMode = !this.id;
+        this.teamId = this.route.snapshot.params['teamId'];
+        this.isAddMode = !this.teamId;
 
         this.form = this.formBuilder.group({
             name: ['', Validators.required],
@@ -36,7 +36,7 @@ export class AddEditTeamComponent implements OnInit {
         });
 
         if (!this.isAddMode) {
-            this.teamService.getById(this.id)
+            this.teamService.getById(this.teamId)
                 .pipe(first())
                 .subscribe(x => this.form.patchValue(x));
         }
@@ -80,7 +80,7 @@ export class AddEditTeamComponent implements OnInit {
     }
 
     private updateTeam() {
-        this.teamService.update(this.id, this.form.value)
+        this.teamService.update(this.teamId, this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {

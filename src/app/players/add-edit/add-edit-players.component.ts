@@ -12,7 +12,7 @@ import { Team } from '../../_models/team';
 @Component({ templateUrl: 'add-edit-players.component.html' })
 export class AddEditPlayerComponent implements OnInit {
     form: FormGroup;
-    id: string;
+    playerId: string;
     isAddMode: boolean;
     loading = false;
     submitted = false;
@@ -28,8 +28,8 @@ export class AddEditPlayerComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.id = this.route.snapshot.params['id'];
-        this.isAddMode = !this.id;
+        this.playerId = this.route.snapshot.params['playerId'];
+        this.isAddMode = !this.playerId;
 
         this.form = this.formBuilder.group({
             ingameName: ['', Validators.required],
@@ -46,7 +46,7 @@ export class AddEditPlayerComponent implements OnInit {
             .subscribe(teams => this.teams = teams);
 
         if (!this.isAddMode) {
-            this.playerService.getById(this.id)
+            this.playerService.getById(this.playerId)
                 .pipe(first())
                 .subscribe(x => this.form.patchValue(x));
         }
@@ -90,7 +90,7 @@ export class AddEditPlayerComponent implements OnInit {
     }
 
     private updatePlayer() {
-        this.playerService.update(this.id, this.form.value)
+        this.playerService.update(this.playerId, this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {

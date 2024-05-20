@@ -1,31 +1,62 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, finalize } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Player } from '../_models/player';
+
+const baseUrl = `${environment.apiUrl}/players`;
 
 @Injectable({ providedIn: 'root' })
 export class PlayerService {
-  private apiUrl = '/api/players';
+    private playerSubject: BehaviorSubject<Player>;
+    public player: Observable<Player>;
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        this.playerSubject = new BehaviorSubject<Player>(null);
+        this.player = this.playerSubject.asObservable();
+    }
 
-  getAll(): Observable<Player[]> {
-    return this.http.get<Player[]>(this.apiUrl);
-  }
+    public get playerValue(): Player {
+        return this.playerSubject.value;
+    }
 
-  getById(id: string): Observable<Player> {
-    return this.http.get<Player>(`${this.apiUrl}/${id}`);
-  }
+    getAll(): Observable<Player[]> {
+        return this.http.get<Player[]>(baseUrl);
+    }
 
-  create(player: Player): Observable<Player> {
-    return this.http.post<Player>(this.apiUrl, player);
-  }
+    getById(playerId: string): Observable<Player> {
+        return this.http.get<Player>(`${baseUrl}/${playerId}`)
+            .pipe(map(player => {
+                this.playerSubject.next(player);
+                return player;
+            }));
+    }
 
-  update(id: string, player: Player): Observable<Player> {
-    return this.http.put<Player>(`${this.apiUrl}/${id}`, player);
-  }
+    create(player: Player): Observable<Player> {
+        return this.http.post<Player>(baseUrl, player);
+    }
 
-  delete(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
+    update(playerId: string, params: Player): Observable<Player> {
+        return this.http.put<Player>(`${baseUrl}/${playerId}`, params)
+            .pipe(map((player: any) => {
+                // update the current player if it was updated
+                if (player.playerId === this.playerValue?.playerId) {
+                    // publish updated player to subscribers
+                    player = { ...this.playerValue, ...player };
+                    this.playerSubject.next(player);
+                }
+                return player;
+            }));
+    }
+
+    delete(playerId: string): Observable<void> {
+        return this.http.delete<void>(`${baseUrl}/${playerId}`)
+            .pipe(finalize(() => {
+                // auto clear the current player if the logged-in player was deleted
+                if (playerId === this.playerValue?.playerId) {
+                    this.playerSubject.next(null);
+                }
+            }));
+    }
 }

@@ -1,36 +1,67 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, finalize } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Team } from '../_models/team';
 import { Player } from '../_models/player';
 
+const baseUrl = `${environment.apiUrl}/teams`;
+
 @Injectable({ providedIn: 'root' })
 export class TeamService {
-  private apiUrl = '/api/teams';
+    private teamSubject: BehaviorSubject<Team>;
+    public team: Observable<Team>;
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        this.teamSubject = new BehaviorSubject<Team>(null);
+        this.team = this.teamSubject.asObservable();
+    }
 
-  getAll(): Observable<Team[]> {
-    return this.http.get<Team[]>(this.apiUrl);
-  }
+    public get teamValue(): Team {
+        return this.teamSubject.value;
+    }
 
-  getById(teamId: string): Observable<Team> {
-    return this.http.get<Team>(`${this.apiUrl}/${teamId}`);
-  }
+    getAll(): Observable<Team[]> {
+        return this.http.get<Team[]>(baseUrl);
+    }
 
-  create(team: Team): Observable<Team> {
-    return this.http.post<Team>(this.apiUrl, team);
-  }
+    getById(teamId: string): Observable<Team> {
+        return this.http.get<Team>(`${baseUrl}/${teamId}`)
+            .pipe(map(team => {
+                this.teamSubject.next(team);
+                return team;
+            }));
+    }
 
-  update(teamId: string, team: Team): Observable<Team> {
-    return this.http.put<Team>(`${this.apiUrl}/${teamId}`, team);
-  }
+    create(team: Team): Observable<Team> {
+        return this.http.post<Team>(baseUrl, team);
+    }
 
-  getPlayersByTeamId(teamId: string): Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.apiUrl}/teams/${teamId}/players`);
-  }
+    update(teamId: string, params: Team): Observable<Team> {
+        return this.http.put<Team>(`${baseUrl}/${teamId}`, params)
+            .pipe(map((team: any) => {
+                // update the current team if it was updated
+                if (team.teamId === this.teamValue?.teamId) {
+                    // publish updated team to subscribers
+                    team = { ...this.teamValue, ...team };
+                    this.teamSubject.next(team);
+                }
+                return team;
+            }));
+    }
 
-  delete(teamId: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${teamId}`);
-  }
+    delete(teamId: string): Observable<void> {
+        return this.http.delete<void>(`${baseUrl}/${teamId}`)
+            .pipe(finalize(() => {
+                // auto clear the current team if the logged-in team was deleted
+                if (teamId === this.teamValue?.teamId) {
+                    this.teamSubject.next(null);
+                }
+            }));
+    }
+
+    getPlayersByTeamId(id: string): Observable<Player[]> {
+        return this.http.get<Player[]>(`${baseUrl}/${id}/players`);
+    }
 }
