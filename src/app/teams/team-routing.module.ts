@@ -8,8 +8,8 @@ import { TeamProfileComponent } from './team-profile/team-profile.component';
 const routes: Routes = [
     { path: '', component: TeamListComponent },
     { path: 'add', component: AddEditTeamComponent },
-    { path: 'edit/:id', component: AddEditTeamComponent },
-    { path: 'profile/:id', component: TeamProfileComponent }
+    { path: 'edit/:teamId', component: AddEditTeamComponent },
+    { path: 'profile/:teamId', component: TeamProfileComponent }
 ];
 
 @NgModule({

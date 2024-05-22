@@ -8,8 +8,8 @@ import { PlayerProfileComponent } from './player-profile/player-profile.componen
 const routes: Routes = [
     { path: '', component: PlayerListComponent },
     { path: 'add', component: AddEditPlayerComponent },
-    { path: 'edit/:id', component: AddEditPlayerComponent },
-    { path: 'profile/:id', component: PlayerProfileComponent }
+    { path: 'edit/:playerId', component: AddEditPlayerComponent },
+    { path: 'profile/:playerId', component: PlayerProfileComponent }
 ];
 
 @NgModule({

@@ -1,3 +1,5 @@
+import { Team } from "./team";
+
 export class Player {
     playerId: string;
     name: string;
@@ -7,6 +9,5 @@ export class Player {
     role: string;
     ingameName: string;
     teamId: string;
-    teamName?: string;
-  }
-  
+    team: Team;
+}

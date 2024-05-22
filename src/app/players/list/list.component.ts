@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../_services/players.services';
 import { TeamService } from '../../_services/team.services';
+import { Team } from '../../_models/team';
 import { Player } from '../../_models/player';
 import { Router } from '@angular/router'
 
